@@ -17,25 +17,25 @@ This repository updates itself daily with GitHub Actions.
 
 - Raw: `https://raw.githubusercontent.com/70akaline/someailist/main/surge/openai.list`
 - jsDelivr: `https://cdn.jsdelivr.net/gh/70akaline/someailist@main/surge/openai.list`
-- ghproxy template: `<your-ghproxy-prefix>/https://raw.githubusercontent.com/70akaline/someailist/main/surge/openai.list`
+- ghproxy: `https://ghfast.top/https://raw.githubusercontent.com/70akaline/someailist/main/surge/openai.list`
 
 #### OpenAI Tracking
 
 - Raw: `https://raw.githubusercontent.com/70akaline/someailist/main/surge/openai-tracking.list`
 - jsDelivr: `https://cdn.jsdelivr.net/gh/70akaline/someailist@main/surge/openai-tracking.list`
-- ghproxy template: `<your-ghproxy-prefix>/https://raw.githubusercontent.com/70akaline/someailist/main/surge/openai-tracking.list`
+- ghproxy: `https://ghfast.top/https://raw.githubusercontent.com/70akaline/someailist/main/surge/openai-tracking.list`
 
 #### Anthropic
 
 - Raw: `https://raw.githubusercontent.com/70akaline/someailist/main/surge/anthropic.list`
 - jsDelivr: `https://cdn.jsdelivr.net/gh/70akaline/someailist@main/surge/anthropic.list`
-- ghproxy template: `<your-ghproxy-prefix>/https://raw.githubusercontent.com/70akaline/someailist/main/surge/anthropic.list`
+- ghproxy: `https://ghfast.top/https://raw.githubusercontent.com/70akaline/someailist/main/surge/anthropic.list`
 
 #### Anthropic Tracking
 
 - Raw: `https://raw.githubusercontent.com/70akaline/someailist/main/surge/anthropic-tracking.list`
 - jsDelivr: `https://cdn.jsdelivr.net/gh/70akaline/someailist@main/surge/anthropic-tracking.list`
-- ghproxy template: `<your-ghproxy-prefix>/https://raw.githubusercontent.com/70akaline/someailist/main/surge/anthropic-tracking.list`
+- ghproxy: `https://ghfast.top/https://raw.githubusercontent.com/70akaline/someailist/main/surge/anthropic-tracking.list`
 
 ### Shadowrocket
 
@@ -43,28 +43,28 @@ This repository updates itself daily with GitHub Actions.
 
 - Raw: `https://raw.githubusercontent.com/70akaline/someailist/main/shadowrocket/openai.list`
 - jsDelivr: `https://cdn.jsdelivr.net/gh/70akaline/someailist@main/shadowrocket/openai.list`
-- ghproxy template: `<your-ghproxy-prefix>/https://raw.githubusercontent.com/70akaline/someailist/main/shadowrocket/openai.list`
+- ghproxy: `https://ghfast.top/https://raw.githubusercontent.com/70akaline/someailist/main/shadowrocket/openai.list`
 
 #### OpenAI Tracking
 
 - Raw: `https://raw.githubusercontent.com/70akaline/someailist/main/shadowrocket/openai-tracking.list`
 - jsDelivr: `https://cdn.jsdelivr.net/gh/70akaline/someailist@main/shadowrocket/openai-tracking.list`
-- ghproxy template: `<your-ghproxy-prefix>/https://raw.githubusercontent.com/70akaline/someailist/main/shadowrocket/openai-tracking.list`
+- ghproxy: `https://ghfast.top/https://raw.githubusercontent.com/70akaline/someailist/main/shadowrocket/openai-tracking.list`
 
 #### Anthropic
 
 - Raw: `https://raw.githubusercontent.com/70akaline/someailist/main/shadowrocket/anthropic.list`
 - jsDelivr: `https://cdn.jsdelivr.net/gh/70akaline/someailist@main/shadowrocket/anthropic.list`
-- ghproxy template: `<your-ghproxy-prefix>/https://raw.githubusercontent.com/70akaline/someailist/main/shadowrocket/anthropic.list`
+- ghproxy: `https://ghfast.top/https://raw.githubusercontent.com/70akaline/someailist/main/shadowrocket/anthropic.list`
 
 #### Anthropic Tracking
 
 - Raw: `https://raw.githubusercontent.com/70akaline/someailist/main/shadowrocket/anthropic-tracking.list`
 - jsDelivr: `https://cdn.jsdelivr.net/gh/70akaline/someailist@main/shadowrocket/anthropic-tracking.list`
-- ghproxy template: `<your-ghproxy-prefix>/https://raw.githubusercontent.com/70akaline/someailist/main/shadowrocket/anthropic-tracking.list`
+- ghproxy: `https://ghfast.top/https://raw.githubusercontent.com/70akaline/someailist/main/shadowrocket/anthropic-tracking.list`
 
 ## Notes
 
 - `Anthropic Tracking` is currently almost empty because the upstream `anthropic` source does not explicitly mark separate tracking domains right now.
-- If you use a GitHub proxy service, replace `<your-ghproxy-prefix>` with your preferred prefix.
+- GitHub proxy examples in this README use `https://ghfast.top/` as the fixed prefix.
 - The rule files are plain text lists that are easy to consume from subscription tools, scripts, and CDN mirrors.

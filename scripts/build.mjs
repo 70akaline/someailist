@@ -17,8 +17,27 @@ const sources = [
   },
 ];
 
+const extraMainRulesBySource = {
+  anthropic: ["DOMAIN,cdn.usefathom.com"],
+};
+
 const trackingKeywordPattern =
   /(telemetry|tracking|analytics|analytic|metrics?|measure|measurement|stats|statistic|event|events|sentry|datadog|intake|collect|collector|beacon|pixel|sdk|log|logging|monitor|observability|sessionreplay)/i;
+
+function dedupeRules(rules) {
+  const seen = new Set();
+  const deduped = [];
+
+  for (const rule of rules) {
+    if (seen.has(rule)) {
+      continue;
+    }
+    seen.add(rule);
+    deduped.push(rule);
+  }
+
+  return deduped;
+}
 
 function stripComment(line) {
   const commentIndex = line.indexOf("#");
@@ -110,10 +129,17 @@ function collectRules(sourceName, text) {
     }
   }
 
+  for (const rule of extraMainRulesBySource[sourceName] ?? []) {
+    if (!seenMain.has(rule)) {
+      main.push(rule);
+      seenMain.add(rule);
+    }
+  }
+
   return {
     name: sourceName,
-    main,
-    tracking,
+    main: dedupeRules(main),
+    tracking: dedupeRules(tracking),
   };
 }
 
