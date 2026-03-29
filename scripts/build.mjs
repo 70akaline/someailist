@@ -154,36 +154,50 @@ async function main() {
 
   const collected = fetched.map((source) => collectRules(source.name, source.text));
   const generatedAt = new Date().toISOString();
-  const sourceSummaries = fetched.map((source) => `${source.name}=${source.url}`);
-
-  const mainRules = collected.flatMap((entry) => entry.main);
-  const trackingRules = collected.flatMap((entry) => entry.tracking);
 
   await Promise.all([
     mkdir(path.join(repoRoot, "surge"), { recursive: true }),
     mkdir(path.join(repoRoot, "shadowrocket"), { recursive: true }),
   ]);
 
-  const mainContent = renderList({
-    title: "AI rules for Surge / Shadowrocket",
-    generatedAt,
-    sourceSummaries,
-    rules: mainRules,
-  });
+  const writes = [];
 
-  const trackingContent = renderList({
-    title: "AI tracking rules for Surge / Shadowrocket",
-    generatedAt,
-    sourceSummaries,
-    rules: trackingRules,
-  });
+  for (const entry of collected) {
+    const sourceSummaries = sources
+      .filter((source) => source.name === entry.name)
+      .map((source) => `${source.name}=${source.url}`);
 
-  await Promise.all([
-    writeFile(path.join(repoRoot, "surge", "ai.list"), mainContent, "utf8"),
-    writeFile(path.join(repoRoot, "surge", "ai-tracking.list"), trackingContent, "utf8"),
-    writeFile(path.join(repoRoot, "shadowrocket", "ai.list"), mainContent, "utf8"),
-    writeFile(path.join(repoRoot, "shadowrocket", "ai-tracking.list"), trackingContent, "utf8"),
-  ]);
+    const mainContent = renderList({
+      title: `${entry.name} rules for Surge / Shadowrocket`,
+      generatedAt,
+      sourceSummaries,
+      rules: entry.main,
+    });
+
+    const trackingContent = renderList({
+      title: `${entry.name} tracking rules for Surge / Shadowrocket`,
+      generatedAt,
+      sourceSummaries,
+      rules: entry.tracking,
+    });
+
+    writes.push(
+      writeFile(path.join(repoRoot, "surge", `${entry.name}.list`), mainContent, "utf8"),
+      writeFile(
+        path.join(repoRoot, "surge", `${entry.name}-tracking.list`),
+        trackingContent,
+        "utf8",
+      ),
+      writeFile(path.join(repoRoot, "shadowrocket", `${entry.name}.list`), mainContent, "utf8"),
+      writeFile(
+        path.join(repoRoot, "shadowrocket", `${entry.name}-tracking.list`),
+        trackingContent,
+        "utf8",
+      ),
+    );
+  }
+
+  await Promise.all(writes);
 }
 
 await main();

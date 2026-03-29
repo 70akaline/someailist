@@ -1,6 +1,0 @@
-# AI tracking rules for Surge / Shadowrocket
-# Generated at: 2026-03-29T14:56:38.524Z
-# Sources: openai=https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/openai, anthropic=https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/anthropic
-
-DOMAIN,o33249.ingest.sentry.io
-DOMAIN,browser-intake-datadoghq.com
