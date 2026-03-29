@@ -48,11 +48,14 @@ This repository updates itself daily with GitHub Actions.
 - jsDelivr: `https://cdn.jsdelivr.net/gh/70akaline/someailist@main/shadowrocket/openai.list`
 - ghproxy: `https://ghfast.top/https://raw.githubusercontent.com/70akaline/someailist/main/shadowrocket/openai.list`
 
-#### OpenAI Tracking
+<details>
+<summary><strong>OpenAI Tracking</strong></summary>
 
 - Raw: `https://raw.githubusercontent.com/70akaline/someailist/main/shadowrocket/openai-tracking.list`
 - jsDelivr: `https://cdn.jsdelivr.net/gh/70akaline/someailist@main/shadowrocket/openai-tracking.list`
 - ghproxy: `https://ghfast.top/https://raw.githubusercontent.com/70akaline/someailist/main/shadowrocket/openai-tracking.list`
+
+</details>
 
 #### Anthropic
 
@@ -60,11 +63,14 @@ This repository updates itself daily with GitHub Actions.
 - jsDelivr: `https://cdn.jsdelivr.net/gh/70akaline/someailist@main/shadowrocket/anthropic.list`
 - ghproxy: `https://ghfast.top/https://raw.githubusercontent.com/70akaline/someailist/main/shadowrocket/anthropic.list`
 
-#### Anthropic Tracking
+<details>
+<summary><strong>Anthropic Tracking</strong></summary>
 
 - Raw: `https://raw.githubusercontent.com/70akaline/someailist/main/shadowrocket/anthropic-tracking.list`
 - jsDelivr: `https://cdn.jsdelivr.net/gh/70akaline/someailist@main/shadowrocket/anthropic-tracking.list`
 - ghproxy: `https://ghfast.top/https://raw.githubusercontent.com/70akaline/someailist/main/shadowrocket/anthropic-tracking.list`
+
+</details>
 
 ## Notes
 
