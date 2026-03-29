@@ -11,7 +11,8 @@ This repository updates itself daily with GitHub Actions.
 
 ## Quick Links
 
-### Surge
+<details>
+<summary><strong>Surge</strong></summary>
 
 #### OpenAI
 
@@ -36,6 +37,8 @@ This repository updates itself daily with GitHub Actions.
 - Raw: `https://raw.githubusercontent.com/70akaline/someailist/main/surge/anthropic-tracking.list`
 - jsDelivr: `https://cdn.jsdelivr.net/gh/70akaline/someailist@main/surge/anthropic-tracking.list`
 - ghproxy: `https://ghfast.top/https://raw.githubusercontent.com/70akaline/someailist/main/surge/anthropic-tracking.list`
+
+</details>
 
 ### Shadowrocket
 
