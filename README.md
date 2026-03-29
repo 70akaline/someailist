@@ -1,4 +1,5 @@
 # someailist
+Thanks: [v2fly/domain-list-community](https://github.com/v2fly/domain-list-community) and [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat)
 
 Auto-updated OpenAI and Anthropic rule lists for Surge and Shadowrocket.
 
