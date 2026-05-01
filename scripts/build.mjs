@@ -9,17 +9,35 @@ const repoRoot = path.resolve(__dirname, "..");
 const sources = [
   {
     name: "openai",
+    outputName: "openai",
     url: "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/openai",
   },
   {
     name: "anthropic",
+    outputName: "anthropic",
     url: "https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/anthropic",
+  },
+  {
+    name: "claude",
+    outputName: "anthropic",
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Claude/Claude.list",
   },
 ];
 
 const extraMainRulesBySource = {
-  anthropic: ["DOMAIN,cdn.usefathom.com"],
+  anthropic: [
+    "DOMAIN-SUFFIX,anthropic.com",
+    "DOMAIN-SUFFIX,claude.com",
+    "DOMAIN-SUFFIX,anthropiccdn.com",
+    "DOMAIN,cdn.usefathom.com",
+  ],
 };
+
+const extraTrackingRulesBySource = {
+  anthropic: ["DOMAIN-SUFFIX,datadoghq.com"],
+};
+
+const commaRuleTypes = new Set(["DOMAIN", "DOMAIN-SUFFIX", "DOMAIN-KEYWORD", "URL-REGEX"]);
 
 const trackingKeywordPattern =
   /(telemetry|tracking|analytics|analytic|metrics?|measure|measurement|stats|statistic|event|events|sentry|datadog|intake|collect|collector|beacon|pixel|sdk|log|logging|monitor|observability|sessionreplay)/i;
@@ -66,26 +84,43 @@ function parseEntry(rawLine, currentSection) {
     return { type: "empty" };
   }
 
-  const parts = content.split(/\s+/);
-  const primary = parts[0];
-  const attributes = parts.slice(1).filter((part) => part.startsWith("@"));
-
   let ruleType = "DOMAIN-SUFFIX";
-  let value = primary;
+  let value = "";
+  let primary = "";
+  let attributes = [];
 
-  if (primary.startsWith("full:")) {
-    ruleType = "DOMAIN";
-    value = primary.slice("full:".length);
-  } else if (primary.startsWith("keyword:")) {
-    ruleType = "DOMAIN-KEYWORD";
-    value = primary.slice("keyword:".length);
-  } else if (primary.startsWith("regexp:")) {
-    ruleType = "URL-REGEX";
-    const regexBody = primary
-      .slice("regexp:".length)
-      .replace(/^\^/, "")
-      .replace(/\$$/, "");
-    value = `^https?:\\/\\/${regexBody}(?::\\d+)?(?:\\/|$)`;
+  const commaParts = content.split(",");
+  const commaRuleType = commaParts[0]?.trim();
+
+  if (commaParts.length >= 2 && /^[A-Z-]+$/.test(commaRuleType)) {
+    if (!commaRuleTypes.has(commaRuleType)) {
+      return { type: "unsupported" };
+    }
+
+    ruleType = commaRuleType;
+    value = commaParts[1].trim();
+    primary = value;
+  } else {
+    const parts = content.split(/\s+/);
+    primary = parts[0];
+    attributes = parts.slice(1).filter((part) => part.startsWith("@"));
+
+    value = primary;
+
+    if (primary.startsWith("full:")) {
+      ruleType = "DOMAIN";
+      value = primary.slice("full:".length);
+    } else if (primary.startsWith("keyword:")) {
+      ruleType = "DOMAIN-KEYWORD";
+      value = primary.slice("keyword:".length);
+    } else if (primary.startsWith("regexp:")) {
+      ruleType = "URL-REGEX";
+      const regexBody = primary
+        .slice("regexp:".length)
+        .replace(/^\^/, "")
+        .replace(/\$$/, "");
+      value = `^https?:\\/\\/${regexBody}(?::\\d+)?(?:\\/|$)`;
+    }
   }
 
   const trackingByAttribute = attributes.some((attribute) => attribute.toLowerCase() === "@ads");
@@ -100,7 +135,7 @@ function parseEntry(rawLine, currentSection) {
   };
 }
 
-function collectRules(sourceName, text) {
+function collectRules(source, text) {
   const main = [];
   const tracking = [];
   const seenMain = new Set();
@@ -129,18 +164,34 @@ function collectRules(sourceName, text) {
     }
   }
 
-  for (const rule of extraMainRulesBySource[sourceName] ?? []) {
-    if (!seenMain.has(rule)) {
-      main.push(rule);
-      seenMain.add(rule);
-    }
-  }
-
   return {
-    name: sourceName,
+    name: source.outputName,
     main: dedupeRules(main),
     tracking: dedupeRules(tracking),
   };
+}
+
+function mergeCollectedRules(collected) {
+  const byName = new Map();
+
+  for (const entry of collected) {
+    if (!byName.has(entry.name)) {
+      byName.set(entry.name, { name: entry.name, main: [], tracking: [] });
+    }
+
+    const target = byName.get(entry.name);
+    target.main.push(...entry.main);
+    target.tracking.push(...entry.tracking);
+  }
+
+  for (const entry of byName.values()) {
+    entry.main.push(...(extraMainRulesBySource[entry.name] ?? []));
+    entry.tracking.push(...(extraTrackingRulesBySource[entry.name] ?? []));
+    entry.main = dedupeRules(entry.main);
+    entry.tracking = dedupeRules(entry.tracking);
+  }
+
+  return [...byName.values()];
 }
 
 function renderList({ title, generatedAt, sourceSummaries, rules }) {
@@ -178,7 +229,9 @@ async function main() {
     })),
   );
 
-  const collected = fetched.map((source) => collectRules(source.name, source.text));
+  const collected = mergeCollectedRules(
+    fetched.map((source) => collectRules(source, source.text)),
+  );
   const generatedAt = new Date().toISOString();
 
   await Promise.all([
@@ -190,7 +243,7 @@ async function main() {
 
   for (const entry of collected) {
     const sourceSummaries = sources
-      .filter((source) => source.name === entry.name)
+      .filter((source) => source.outputName === entry.name)
       .map((source) => `${source.name}=${source.url}`);
 
     const mainContent = renderList({

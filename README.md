@@ -7,6 +7,7 @@ The source data comes from:
 
 - `https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/openai`
 - `https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/anthropic`
+- `https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Claude/Claude.list`
 
 This repository updates itself daily with GitHub Actions.
 
