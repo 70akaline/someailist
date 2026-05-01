@@ -20,7 +20,7 @@ const sources = [
   {
     name: "claude",
     outputName: "anthropic",
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Claude/Claude.list",
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Claude/Claude.list",
   },
 ];
 
