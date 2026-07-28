@@ -1,5 +1,5 @@
 # anthropic rules for Surge / Shadowrocket
-# Generated at: 2026-07-27T06:00:14.290Z
+# Generated at: 2026-07-28T05:24:58.648Z
 # Sources: anthropic=https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/anthropic, claude=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Claude/Claude.list
 
 DOMAIN-SUFFIX,anthropic.com
