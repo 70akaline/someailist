@@ -22,6 +22,13 @@ const sources = [
     outputName: "anthropic",
     url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Claude/Claude.list",
   },
+  {
+    name: "grok",
+    outputName: "grok",
+    sourceLabel: "built-in",
+    text: ["full:api.mixpanel.com", "grok.com", "x.ai"].join("\n"),
+    writeTracking: false,
+  },
 ];
 
 const extraMainRulesBySource = {
@@ -225,7 +232,7 @@ async function main() {
   const fetched = await Promise.all(
     sources.map(async (source) => ({
       ...source,
-      text: await fetchText(source.url),
+      text: source.text ?? (await fetchText(source.url)),
     })),
   );
 
@@ -244,7 +251,7 @@ async function main() {
   for (const entry of collected) {
     const sourceSummaries = sources
       .filter((source) => source.outputName === entry.name)
-      .map((source) => `${source.name}=${source.url}`);
+      .map((source) => `${source.name}=${source.url ?? source.sourceLabel}`);
 
     const mainContent = renderList({
       title: `${entry.name} rules for Surge / Shadowrocket`,
@@ -262,18 +269,27 @@ async function main() {
 
     writes.push(
       writeFile(path.join(repoRoot, "surge", `${entry.name}.list`), mainContent, "utf8"),
-      writeFile(
-        path.join(repoRoot, "surge", `${entry.name}-tracking.list`),
-        trackingContent,
-        "utf8",
-      ),
       writeFile(path.join(repoRoot, "shadowrocket", `${entry.name}.list`), mainContent, "utf8"),
-      writeFile(
-        path.join(repoRoot, "shadowrocket", `${entry.name}-tracking.list`),
-        trackingContent,
-        "utf8",
-      ),
     );
+
+    const writeTracking = sources
+      .filter((source) => source.outputName === entry.name)
+      .some((source) => source.writeTracking !== false);
+
+    if (writeTracking) {
+      writes.push(
+        writeFile(
+          path.join(repoRoot, "surge", `${entry.name}-tracking.list`),
+          trackingContent,
+          "utf8",
+        ),
+        writeFile(
+          path.join(repoRoot, "shadowrocket", `${entry.name}-tracking.list`),
+          trackingContent,
+          "utf8",
+        ),
+      );
+    }
   }
 
   await Promise.all(writes);

@@ -1,7 +1,7 @@
 # someailist
 Thanks: [v2fly/domain-list-community](https://github.com/v2fly/domain-list-community) and [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat)
 
-Auto-updated OpenAI and Anthropic rule lists for Surge and Shadowrocket.
+Auto-updated OpenAI, Anthropic, and Grok rule lists for Surge and Shadowrocket.
 
 The source data comes from:
 
@@ -40,6 +40,12 @@ This repository updates itself daily with GitHub Actions.
 - jsDelivr: `https://cdn.jsdelivr.net/gh/70akaline/someailist@main/surge/anthropic-tracking.list`
 - ghproxy: `https://ghfast.top/https://raw.githubusercontent.com/70akaline/someailist/main/surge/anthropic-tracking.list`
 
+#### Grok
+
+- Raw: `https://raw.githubusercontent.com/70akaline/someailist/main/surge/grok.list`
+- jsDelivr: `https://cdn.jsdelivr.net/gh/70akaline/someailist@main/surge/grok.list`
+- ghproxy: `https://ghfast.top/https://raw.githubusercontent.com/70akaline/someailist/main/surge/grok.list`
+
 </details>
 
 ### Shadowrocket
@@ -64,6 +70,12 @@ This repository updates itself daily with GitHub Actions.
 - Raw: `https://raw.githubusercontent.com/70akaline/someailist/main/shadowrocket/anthropic.list`
 - jsDelivr: `https://cdn.jsdelivr.net/gh/70akaline/someailist@main/shadowrocket/anthropic.list`
 - ghproxy: `https://ghfast.top/https://raw.githubusercontent.com/70akaline/someailist/main/shadowrocket/anthropic.list`
+
+#### Grok
+
+- Raw: `https://raw.githubusercontent.com/70akaline/someailist/main/shadowrocket/grok.list`
+- jsDelivr: `https://cdn.jsdelivr.net/gh/70akaline/someailist@main/shadowrocket/grok.list`
+- ghproxy: `https://ghfast.top/https://raw.githubusercontent.com/70akaline/someailist/main/shadowrocket/grok.list`
 
 <details>
 <summary><strong>Anthropic Tracking</strong></summary>
