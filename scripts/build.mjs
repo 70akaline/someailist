@@ -29,6 +29,13 @@ const sources = [
     text: ["full:api.mixpanel.com", "grok.com", "x.ai"].join("\n"),
     writeTracking: false,
   },
+  {
+    name: "cursor",
+    outputName: "cursor",
+    sourceLabel: "built-in",
+    text: ["cursor-cdn.com", "cursor.sh", "cursorapi.com", "graphite.com"].join("\n"),
+    writeTracking: false,
+  },
 ];
 
 const extraMainRulesBySource = {
