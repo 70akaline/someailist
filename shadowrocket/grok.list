@@ -1,5 +1,5 @@
 # grok rules for Surge / Shadowrocket
-# Generated at: 2026-10-17T06:57:55.970Z
+# Generated at: 2026-10-18T07:13:58.038Z
 # Sources: grok=built-in
 
 DOMAIN,api.mixpanel.com
