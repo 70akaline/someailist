@@ -1,5 +1,5 @@
 # openai rules for Surge / Shadowrocket
-# Generated at: 2026-11-05T09:29:57.756Z
+# Generated at: 2026-11-06T09:25:09.012Z
 # Sources: openai=https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/openai
 
 DOMAIN-SUFFIX,chat.com
