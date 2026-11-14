@@ -1,5 +1,5 @@
 # openai tracking rules for Surge / Shadowrocket
-# Generated at: 2026-11-13T09:32:16.390Z
+# Generated at: 2026-11-14T08:58:41.798Z
 # Sources: openai=https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/openai
 
 DOMAIN-SUFFIX,oaistatsig.com
